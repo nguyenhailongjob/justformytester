@@ -1,0 +1,115 @@
+        -:    0:Source:ex0702.c
+        -:    0:Graph:ex0702.gcno
+        -:    0:Data:ex0702.gcda
+        -:    0:Runs:18
+        -:    0:Source is newer than graph
+        -:    1:#include <stdio.h>
+        -:    2:#include <stdlib.h>
+        -:    3:#include <string.h>
+        -:    4:#include <ctype.h>
+        -:    5:#include <limits.h>
+        -:    6:#include <math.h>
+        -:    7:
+      132:    8:int is_integer(char a[100]){
+      132:    9:    if (a==NULL){
+    #####:   10:        return -1;
+        -:   11:    }
+      432:   12:    for (int i=0; i<strlen(a)-1; i++){
+      312:   13:        if (isdigit(a[i])){
+      300:   14:            continue;
+        -:   15:        }else{
+       12:   16:            return 2;
+        -:   17:        }
+        -:   18:    }
+      120:   19:    if (atoi(a)>=100){
+       12:   20:        return 3;
+        -:   21:    }
+      108:   22:    if ((strlen(a)-1)>8){
+    #####:   23:        return 4;
+        -:   24:    }
+      108:   25:    return 1;
+        -:   26:}
+        -:   27:
+       16:   28:int is_triangle(int a, int b, int c){
+       16:   29:    if (a+b>c&&b+c>a&&c+a>b){
+        8:   30:        return 1;
+        -:   31:    } else {
+        8:   32:        return -1;
+        -:   33:    }
+        -:   34:}
+        4:   35:int is_equilateral_triangle(int a, int b, int c){
+        4:   36:    if (a==b&& b==c){
+        1:   37:        return 1;
+        -:   38:    } else{
+        3:   39:        return 2;
+        -:   40:    }
+        -:   41:}
+        3:   42:int is_right_triangle(int a, int b, int c){
+        3:   43:    if ((a*a)+(b*b)==(c*c)||(b*b)+(c*c)==(a*a)||(c*c)+(a*a)==(b*b)){
+        1:   44:        return 1;
+        -:   45:    } else{
+        2:   46:        return 2;
+        -:   47:    }
+        -:   48:}
+        2:   49:int is_isosceles_triangle(int a, int b, int c){
+        2:   50:    if (a==b||b==c||c==a){
+        1:   51:        return 1;
+        -:   52:    } else {
+        1:   53:        return 2;
+        -:   54:    }
+        -:   55:}
+       18:   56:int main(void){
+       18:   57:    char a[100]="";
+       18:   58:    char b[100]="";
+       18:   59:    char c[100]="";
+        -:   60:    //side a
+       18:   61:    printf("Input three sides:> ");
+       18:   62:    printf("\na:");
+       18:   63:    fgets(a, sizeof a, stdin);
+       18:   64:    if (is_integer(a)==-1||is_integer(a)==2||is_integer(a)==3||is_integer(a)==4){
+        8:   65:        printf("[ERROR], the side must be integer from equal 1 to less than 100");
+        8:   66:        return 0;
+        -:   67:    }
+        -:   68:    //side b
+       10:   69:    printf("\nb:");
+       10:   70:    fgets(b, sizeof b, stdin);
+       10:   71:    if (is_integer(b)==-1||is_integer(b)==2||is_integer(b)==3||is_integer(a)==4){
+        1:   72:        printf("[ERROR], the side must be integer from equal 1 to less than 100");
+        1:   73:        return 0;
+        -:   74:    }
+        -:   75:    //side c
+        9:   76:    printf("\nc:");
+        9:   77:    fgets(c, sizeof c, stdin);
+        9:   78:    if (is_integer(c)==-1||is_integer(c)==2||is_integer(c)==3||is_integer(a)==4){
+        1:   79:        printf("[ERROR], the side must be integer from equal 1 to less than 100");
+        1:   80:        return 0;
+        -:   81:    }
+        -:   82:    
+        -:   83:    //check is_triangle
+        8:   84:    is_triangle(atoi(a), atoi(b), atoi(c));
+        8:   85:    if (is_triangle(atoi(a), atoi(b), atoi(c))==-1){
+        4:   86:        printf("[ERROR], this is not triangle");
+        4:   87:        return 0;
+        -:   88:    }
+        -:   89:    
+        -:   90:    // check equilateral triangle
+        4:   91:    if (is_equilateral_triangle(atoi(a), atoi(b), atoi(c))==1){
+        1:   92:        printf("This is equilateral triangle");
+        1:   93:        return 0;
+        -:   94:    }
+        -:   95:    
+        -:   96:    // check right triangle
+        3:   97:    if (is_right_triangle(atoi(a), atoi(b), atoi(c))==1){
+        1:   98:        printf("This is right triangle");
+        1:   99:        return 0;
+        -:  100:    }
+        -:  101:    
+        -:  102:    //check isosceles triangle
+        -:  103:    
+        2:  104:    if (is_isosceles_triangle(atoi(a), atoi(b), atoi(c))==1){
+        1:  105:        printf("This is isosceles triangle");
+        1:  106:        return 0;
+        -:  107:    }
+        1:  108:    printf("This is scalene triangle");
+        1:  109:    return 0;
+        -:  110:}
